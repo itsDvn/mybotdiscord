@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discord Bot Dashboard</title>
+</head>
+<body>
+  <h1>Bot Dashboard</h1>
+  
+  <h2>Add Command</h2>
+  <input id="cmdName" placeholder="Command Name">
+  <input id="cmdReply" placeholder="Reply Message">
+  <button onclick="addCommand()">Add</button>
+
+  <script>
+    function addCommand() {
+      const name = document.getElementById('cmdName').value;
+      const reply = document.getElementById('cmdReply').value;
+
+      fetch('http://localhost:3000/add-command', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, reply })
+      }).then(res => res.json())
+        .then(data => alert(data.message));
+    }
+  </script>
+</body>
+</html>
